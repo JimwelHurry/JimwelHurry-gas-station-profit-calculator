@@ -1,0 +1,152 @@
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .logo {
+    max-width: 150px; /* Adjust the size of the logo */
+    margin-bottom: 10px;
+  }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    background-image: url('img/background.jpg'); /* Add your image path here */
+    background-size: cover; /* Ensures the image covers the entire page */
+    background-position: center center; /* Centers the image */
+    background-attachment: fixed; /* Keeps the background image fixed when scrolling */
+  }
+  
+  .App {
+    background-color: rgba(177, 231, 199, 0.8); /* Make the background slightly transparent so the image shows through */
+    color: #333;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  
+  h1 {
+    text-align: center;
+    color: #09a551;
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: 300px;
+    margin-bottom: 15px;
+    transform: scale(1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    transition: border 0.3s ease;
+  }
+  
+  input:focus {
+    border-color: #09a551;
+    outline: none;
+  }
+  
+  button {
+    background-color: #09a551;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 100%;
+  }
+  
+  button:hover {
+    background-color: #ffe800;
+    transform: scale(1.05);
+  }
+  
+  .results {
+    margin-top: 30px;
+    background-color: #ffe800;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  h3 {
+    color: #c20a11;
+    animation: slideIn 0.6s ease-out;
+  }
+  
+  /* Mobile View Adjustments */
+  @media (max-width: 600px) {
+    .App {
+      padding: 10px;
+    }
+    form {
+      flex-direction: column;
+      align-items: center;
+    }
+    .card {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    button {
+      width: 100%;
+    }
+    .results {
+      margin-top: 20px;
+      padding: 15px;
+    }
+    h1 {
+      font-size: 24px;
+    }
+    h3 {
+      font-size: 18px;
+    }
+  }
+  
+  /* Keyframe Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  
+  /* Footer Styles */
+  footer {
+    text-align: center;
+    margin-top: 20px;
+  }
+  

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gas Station Profit Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="App">
+    <div class="header">
+        <img src="img/logo.jpg" alt="Logo" class="logo">
+      </div>
+    <h1>GAS STATION PROFIT CALCULATOR</h1>
+    
+    <form id="profitForm">
+      <!-- Unleaded Input Section -->
+      <div class="card">
+        <h2 style="color: #c20a11;">Premium</h2> <!-- Red -->
+        <label for="readingYesterdayUnleaded">Kahapon na Reading:</label>
+        <input type="number" step="any" id="readingYesterdayUnleaded" required>
+      </div>
+      <div class="card">
+        <label for="readingTodayUnleaded">Ngayon na Reading:</label>
+        <input type="number" step="any" id="readingTodayUnleaded" required>
+      </div>
+      <div class="card">
+        <label for="productPriceUnleaded">Presyo ng Premium (per liter):</label>
+        <input type="number" step="any" id="productPriceUnleaded" required>
+      </div>
+      <div class="card">
+        <label for="supplyPriceUnleaded">Presyo ng Supply (per liter):</label>
+        <input type="number" step="any" id="supplyPriceUnleaded" required>
+      </div>
+
+      <!-- Premium Input Section -->
+      <div class="card">
+        <h2 style="color: #09a551;">Unleaded</h2> <!-- Green -->
+        <label for="readingYesterdayPremium">Kahapon na Reading:</label>
+        <input type="number" step="any" id="readingYesterdayPremium" required>
+      </div>
+      <div class="card">
+        <label for="readingTodayPremium">Ngayon na Reading:</label>
+        <input type="number" step="any" id="readingTodayPremium" required>
+      </div>
+      <div class="card">
+        <label for="productPricePremium">Presyo ng Unleaded (per liter):</label>
+        <input type="number" step="any" id="productPricePremium" required>
+      </div>
+      <div class="card">
+        <label for="supplyPricePremium">Presyo ng Supply (per liter):</label>
+        <input type="number" step="any" id="supplyPricePremium" required>
+      </div>
+
+      <!-- Diesel Input Section -->
+      <div class="card">
+        <h2 style="color: #f9db00;">Diesel</h2> <!-- Yellow -->
+        <label for="readingYesterdayDiesel">Kahapon na Reading:</label>
+        <input type="number" step="any" id="readingYesterdayDiesel" required>
+      </div>
+      <div class="card">
+        <label for="readingTodayDiesel">Ngayon na Reading:</label>
+        <input type="number" step="any" id="readingTodayDiesel" required>
+      </div>
+      <div class="card">
+        <label for="productPriceDiesel">Presyo ng Diesel (per liter):</label>
+        <input type="number" step="any" id="productPriceDiesel" required>
+      </div>
+      <div class="card">
+        <label for="supplyPriceDiesel">Presyo ng Supply (per liter):</label>
+        <input type="number" step="any" id="supplyPriceDiesel" required>
+      </div>
+
+      <button type="submit">Kalkulahin</button>
+    </form>
+
+    <!-- Display Results -->
+    <div class="results" id="results" style="display: none;">
+      <h3>Unleaded Breakdown</h3>
+      <p><strong>Benta:</strong> ₱<span id="salesUnleaded"></span></p>
+      <p><strong>Tubo:</strong> ₱<span id="profitUnleaded"></span></p>
+
+      <h3>Premium Breakdown</h3>
+      <p><strong>Benta:</strong> ₱<span id="salesPremium"></span></p>
+      <p><strong>Tubo:</strong> ₱<span id="profitPremium"></span></p>
+
+      <h3>Diesel Breakdown</h3>
+      <p><strong>Benta:</strong> ₱<span id="salesDiesel"></span></p>
+      <p><strong>Tubo:</strong> ₱<span id="profitDiesel"></span></p>
+
+      <h3>Total Benta</h3>
+      <p><strong>Total Sales:</strong> ₱<span id="totalSales"></span></p>
+      <h3>Total Tubo</h3>
+      <p><strong>Total Profit:</strong> ₱<span id="totalProfit"></span></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>Created By: Jimwel Hurry</p>
+  </footer>
+
+  <script src="script.js"></script> <!-- Link to the external JS file -->
+
+</body>
+</html>
