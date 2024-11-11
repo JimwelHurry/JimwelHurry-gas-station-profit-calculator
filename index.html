@@ -5,15 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gas Station Profit Calculator</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
   <div class="App">
     <div class="header">
-        <img src="img/logo.jpg" alt="Logo" class="logo">
-      </div>
+      <img src="img/logo.jpg" alt="Logo" class="logo">
+    </div>
+    
     <h1>GAS STATION PROFIT CALCULATOR</h1>
     
+    <!-- Current Date and Time Section -->
+    <div class="current-date-time">
+      <p id="currentDateTime"></p>
+    </div>
+
     <form id="profitForm">
       <!-- Unleaded Input Section -->
       <div class="card">
@@ -94,13 +101,106 @@
       <h3>Total Tubo</h3>
       <p><strong>Total Profit:</strong> ₱<span id="totalProfit"></span></p>
     </div>
+
+    <button id="downloadPDF">Download PDF</button>
+
+    <footer>
+      <p>Created By: Jimwel Hurry</p>
+    </footer>
   </div>
 
-  <footer>
-    <p>Created By: Jimwel Hurry</p>
-  </footer>
+  <script src="script.js"></script>
+  <script>
+    // Get current date and time
+    function updateDateTime() {
+      const date = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+      const formattedDate = date.toLocaleDateString('en-US', options);
+      document.getElementById('currentDateTime').textContent = `Current Date and Time: ${formattedDate}`;
+    }
 
-  <script src="script.js"></script> <!-- Link to the external JS file -->
+    // Update date and time every minute
+    setInterval(updateDateTime, 60000);
 
+    // Initial call to set the date and time
+    updateDateTime();
+
+    // Handle form submission and calculate sales and profits
+    document.getElementById('profitForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Read input values
+      const readingYesterdayUnleaded = parseFloat(document.getElementById('readingYesterdayUnleaded').value);
+      const readingTodayUnleaded = parseFloat(document.getElementById('readingTodayUnleaded').value);
+      const productPriceUnleaded = parseFloat(document.getElementById('productPriceUnleaded').value);
+      const supplyPriceUnleaded = parseFloat(document.getElementById('supplyPriceUnleaded').value);
+
+      const readingYesterdayPremium = parseFloat(document.getElementById('readingYesterdayPremium').value);
+      const readingTodayPremium = parseFloat(document.getElementById('readingTodayPremium').value);
+      const productPricePremium = parseFloat(document.getElementById('productPricePremium').value);
+      const supplyPricePremium = parseFloat(document.getElementById('supplyPricePremium').value);
+
+      const readingYesterdayDiesel = parseFloat(document.getElementById('readingYesterdayDiesel').value);
+      const readingTodayDiesel = parseFloat(document.getElementById('readingTodayDiesel').value);
+      const productPriceDiesel = parseFloat(document.getElementById('productPriceDiesel').value);
+      const supplyPriceDiesel = parseFloat(document.getElementById('supplyPriceDiesel').value);
+
+      // Calculate sales and profits
+      const salesUnleaded = (readingTodayUnleaded - readingYesterdayUnleaded) * productPriceUnleaded;
+      const profitUnleaded = (readingTodayUnleaded - readingYesterdayUnleaded) * (productPriceUnleaded - supplyPriceUnleaded);
+
+      const salesPremium = (readingTodayPremium - readingYesterdayPremium) * productPricePremium;
+      const profitPremium = (readingTodayPremium - readingYesterdayPremium) * (productPricePremium - supplyPricePremium);
+
+      const salesDiesel = (readingTodayDiesel - readingYesterdayDiesel) * productPriceDiesel;
+      const profitDiesel = (readingTodayDiesel - readingYesterdayDiesel) * (productPriceDiesel - supplyPriceDiesel);
+
+      const totalSales = salesUnleaded + salesPremium + salesDiesel;
+      const totalProfit = profitUnleaded + profitPremium + profitDiesel;
+
+      // Display results
+      document.getElementById('salesUnleaded').textContent = salesUnleaded.toFixed(2);
+      document.getElementById('profitUnleaded').textContent = profitUnleaded.toFixed(2);
+      document.getElementById('salesPremium').textContent = salesPremium.toFixed(2);
+      document.getElementById('profitPremium').textContent = profitPremium.toFixed(2);
+      document.getElementById('salesDiesel').textContent = salesDiesel.toFixed(2);
+      document.getElementById('profitDiesel').textContent = profitDiesel.toFixed(2);
+      document.getElementById('totalSales').textContent = totalSales.toFixed(2);
+      document.getElementById('totalProfit').textContent = totalProfit.toFixed(2);
+
+      // Show results section
+      document.getElementById('results').style.display = 'block';
+    });
+
+    // jsPDF function to create and download the PDF
+    document.getElementById('downloadPDF').addEventListener('click', () => {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      doc.text("Gas Station Profit Calculator Report", 20, 20);
+
+      // Unleaded data
+      doc.text(`Unleaded Breakdown:`, 20, 40);
+      doc.text(`Benta: ₱${document.getElementById('salesUnleaded').innerText}`, 20, 50);
+      doc.text(`Tubo: ₱${document.getElementById('profitUnleaded').innerText}`, 20, 60);
+
+      // Premium data
+      doc.text(`Premium Breakdown:`, 20, 70);
+      doc.text(`Benta: ₱${document.getElementById('salesPremium').innerText}`, 20, 80);
+      doc.text(`Tubo: ₱${document.getElementById('profitPremium').innerText}`, 20, 90);
+
+      // Diesel data
+      doc.text(`Diesel Breakdown:`, 20, 100);
+      doc.text(`Benta: ₱${document.getElementById('salesDiesel').innerText}`, 20, 110);
+      doc.text(`Tubo: ₱${document.getElementById('profitDiesel').innerText}`, 20, 120);
+
+      // Total Sales and Profit
+      doc.text(`Total Sales: ₱${document.getElementById('totalSales').innerText}`, 20, 130);
+      doc.text(`Total Profit: ₱${document.getElementById('totalProfit').innerText}`, 20, 140);
+
+      // Save the PDF
+      doc.save('Gas_Station_Profit_Report.pdf');
+    });
+  </script>
 </body>
 </html>
